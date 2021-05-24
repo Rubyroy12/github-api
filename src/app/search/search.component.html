@@ -3,13 +3,14 @@
   <div class="container-fluid ">
     <h2>Enter your github name</h2>
   
-    <form (ngSubmit)="submitUsername()">
+    <form (ngSubmit)="performSearch()">
       <div class="form-group d-flex justify-content-around">
         <input type="text" [(ngModel)] = 'username' name="username" placeholder="Enter the username " class="form-control text-danger">      
         <button type="submit" class="btn btn-info text-info" name="username" >Search</button>
       </div>
     </form>
-  
+    
   </div>
+  <app-users></app-users>
 </div>
  

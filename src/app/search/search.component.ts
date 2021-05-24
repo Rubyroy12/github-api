@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchGithubService } from '../search-github.service';
+import { User } from '../user';
 
 
 
@@ -9,28 +10,32 @@ import { SearchGithubService } from '../search-github.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  user: User;
+  username: string;
+  searchservice: SearchGithubService;
+  searchTerm?: string
 
-  username:string;
-  searchservice:SearchGithubService;
 
-  submitUsername(){
-    this.searchservice.getuserData(this.username);
-    
+
+  performSearch(searchTerm: any) {
+    this.searchservice.getuserData(searchTerm).then((success) => {
+      this.user = this.searchservice.user
+    })
+
   }
 
 
- 
 
-  constructor(searchsearvice:SearchGithubService  ) {
-    this.searchservice=  searchsearvice;
- 
 
-   }
+  constructor(searchsearvice: SearchGithubService) {
+    this.searchservice = searchsearvice;
+  }
 
 
   ngOnInit(): void {
-    
-    
+    this.performSearch('Rubyroy12');
+
+
   }
 
 }
