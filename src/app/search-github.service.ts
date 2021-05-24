@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { Repos } from './repos';
-import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -11,27 +11,47 @@ import { environment } from 'src/environments/environment';
 export class SearchGithubService {
   user: User;
   repos: Repos;
+  repoData = [];
+  newUserData: any = [];
 
-
-  constructor(private http: HttpClient) { 
-    this.user = new User("","", "", "",new Date,0);
-    this.repos= new Repos()
+  constructor(private http: HttpClient) {
+    this.user = new User("", "", "", new Date(), 0);
+    this.repos = new Repos("", "", "", new Date());
   }
-  GithubSearch(){
-    interface ApiResponse{
+  getuserData(username: string) {
+    interface ApiResponse {
       login: string;
       bio: string;
-      location: string;
       avatar_url: string;
       created_at: Date;
-      public_repos:number;
-    }
-    let promise = new Promise((resolve, reject) =>{
-      this.http.get<ApiResponse>(environment.githubApiKey).toPromise().then((response=>{
-        this.user.login = response.login;
-      }))
-    })
 
-    
+    }
+    let promise = new Promise((resolve, reject) => {
+      this.http.get<ApiResponse>("https://api.github.com/users/" + username).toPromise().then(response => {
+        this.user.login = response.login;
+        this.user.bio = response.bio;
+        this.user.avatar_url = response.avatar_url;
+        this.user.created_at = response.created_at;
+
+
+        resolve(response)
+      }, error => {
+        reject(Error)
+      })
+      this.http.get<any>("https://api.github.com/users/" + username + "/repos").toPromise().then(response => {
+        for (let i = 0; i < response.length; i++) {
+          this.newUserData = new Repos(response[i].name, response[i].description, response[i].clone_url, response[i].updated_at)
+          this.repoData.push(this.newUserData);
+        }
+        resolve(response)
+      }
+        , error => {
+          reject(error)
+        })
+
+    })
+    return promise;
+
+
   }
 }
