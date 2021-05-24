@@ -1,20 +1,18 @@
-<div>
-    <div>
-        <button class="btn btn-outline-info  " routerLink="/users" >View Details</button>
-        <!-- <button class="btn btn-outline-info "  routerLink="/repositories" >Repositories</button> -->
-      </div>
+<div class="container">
+  
     <h2> github details</h2>
     <div class="container-fluid">
-      <h4>{{user.login}}</h4>
-      <img src="{{user.avatar_url}}" alt="">
-      <p>{{user.bio}}</p>
-      <p>{{user.created_at}}</p>
+      <h4>Username: {{user.login}}</h4>
+     <img src="{{user.avatar_url}}" alt="">
+      <p> Bio:  {{user.bio}}</p>
+      <p>Date Created: {{user.created_at}}</p>
 
     </div>
+    <h3>Repositories</h3>
     <div *ngFor = "let repoDetail of repoDetails">
-        <h4>{{repoDetail.name}} } | {{repoDetail.clone_url}}</h4>
+        <h4>Repo Name:{{repoDetail.name}} } | {{repoDetail.clone_url}}</h4>
         <p>{{repoDetail.description}}</p>
-        <p>{{repoDetail.language}}</p>
+        <p>{{repoDetail.created_at}}</p>
         <p>{{repoDetail.updated_at}}</p>
     </div>
 
