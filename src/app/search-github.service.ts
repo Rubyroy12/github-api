@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {environment} from '../environments/environment'
 import { User } from './user';
 import { Repos } from './repos';
 
@@ -27,7 +28,7 @@ export class SearchGithubService {
 
     }
     let promise = new Promise((resolve, reject) => {
-      this.http.get<ApiResponse>("https://api.github.com/users/" + username).toPromise().then(response => {
+      this.http.get<ApiResponse>( "https://api.github.com/users/"+ username).toPromise().then(response => {
         this.user.login = response.login;
         this.user.bio = response.bio;
         this.user.avatar_url = response.avatar_url;
@@ -38,7 +39,7 @@ export class SearchGithubService {
       }, error => {
         reject(Error)
       })
-      this.http.get<any>("https://api.github.com/users/" + username + "/repos").toPromise().then(response => {
+      this.http.get<any>(environment.apiUrl + username + "/repos").toPromise().then(response => {
         for (let i = 0; i < response.length; i++) {
           this.newUserData = new Repos(response[i].name, response[i].description, response[i].clone_url, response[i].updated_at)
           this.repoData.push(this.newUserData);
