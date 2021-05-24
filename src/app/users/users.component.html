@@ -19,7 +19,7 @@
     </div>
     <h3>Repositories</h3>
     <div *ngFor="let repoDetail of repoDetails">
-      <h4>Repo Name:{{repoDetail.name}} | {{repoDetail.clone_url}}</h4>
+      <h4>Repo Name:{{repoDetail.name}} | <a href="{{repoDetail.clone_url}}"></a></h4>
       <p>Description: {{repoDetail.description}}</p>
       <p>Date: {{repoDetail.created_at}}</p>
       <p>Date Updated: {{repoDetail.updated_at}}</p>
