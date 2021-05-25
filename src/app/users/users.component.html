@@ -1,5 +1,5 @@
 <div class="container">
-  <hr class="bg-danger">
+  
 
   <h2 > github details </h2>
   <div class="container-fluid row">
@@ -19,12 +19,16 @@
     </div>
     <div class="card ">
       <h3>Repositories</h3>
-    <div *ngFor="let repoDetail of repoDetails" class="card bg-primary">
-      <h4>Repo Name:{{repoDetail.name}} | <a href="{{repoDetail.clone_url}}">view in Gituhb</a></h4>
-      <p>Description: {{repoDetail.description}}</p>
-      <!-- <p>Date: {{repoDetail.created_at}}</p> -->
-      <p>Date Updated: {{repoDetail.updated_at}}</p>
-    </div>
+      <ul>
+        <li *ngFor="let repoDetail of repoDetails" class="card bg-primary">
+          <h4>Repo Name:{{repoDetail.name}} | <a href="{{repoDetail.clone_url}}">view in Gituhb</a></h4>
+          <p>Description: {{repoDetail.description}}</p>
+          <!-- <p>Date: {{repoDetail.created_at}}</p> -->
+          <p>Date Updated: {{repoDetail.updated_at}}</p>
+        </li>
+
+      </ul>
+   
 
     </div>
     
