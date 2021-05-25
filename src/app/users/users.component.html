@@ -20,7 +20,7 @@
     <div class="card ">
       <h3>Repositories</h3>
       <ul>
-        <li *ngFor="let repoDetail of repoDetails" class="card bg-primary">
+        <li *ngFor="let repoDetail of repoDetails" class="card text-danger">
           <h4>Repo Name:{{repoDetail.name}} | <a href="{{repoDetail.clone_url}}">view in Gituhb</a></h4>
           <p>Description: {{repoDetail.description}}</p>
           <!-- <p>Date: {{repoDetail.created_at}}</p> -->
